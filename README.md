@@ -21,6 +21,6 @@ more config to enable tabs
 ```
 # note
 - highlighter is pretty crude, lacks `^` escaping for example
-- `call` doesn't seem to work on 64-bit linux
+- `call` needs to be `call [ "process" "args" ]` on linux
 - built for portable projects, where the rebol3 binary is saved as `r3` in the same location as the org-file
 - given the above, temp scripts are run from the same location and deleted
