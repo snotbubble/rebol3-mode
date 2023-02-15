@@ -40,11 +40,6 @@
 	"io"
 	:group 'rebol3-mode)
 
-(defvar rebol3-events-word 'rebol3-events-word)
-(defface rebol3-events-word '((t (:foreground "#CC7B29" :weight bold)))
-	"events"
-	:group 'rebol3-mode)
-
 (defvar rebol3-comparison-word 'rebol3-comparison-word)
 (defface rebol3-comparison-word '((t (:foreground "#D9662B" :weight bold)))
 	"comparison"
@@ -95,44 +90,9 @@
 	"datatypes"
 	:group 'rebol3-mode)
 
-(defvar rebol3-viewobj-word 'rebol3-viewobj-word)
-(defface rebol3-viewobj-word '((t (:foreground "#6C7ED9" :weight bold)))
-	"viewobj"
-	:group 'rebol3-mode)
-
-(defvar rebol3-drawobj-word 'rebol3-drawobj-word)
-(defface rebol3-drawobj-word '((t (:foreground "#6C7ED9" :weight bold)))
-	"drawobj"
-	:group 'rebol3-mode)
-
-(defvar rebol3-viewcmd-word 'rebol3-viewcmd-word)
-(defface rebol3-viewcmd-word '((t (:foreground "#527BCC" :weight bold)))
-	"viewcmd"
-	:group 'rebol3-mode)
-
-(defvar rebol3-drawcmd-word 'rebol3-drawcmd-word)
-(defface rebol3-drawcmd-word '((t (:foreground "#527BCC" :weight bold)))
-	"drawcmd"
-	:group 'rebol3-mode)
-
-(defvar rebol3-viewprp-word 'rebol3-viewprp-word)
-(defface rebol3-viewprp-word '((t (:foreground "#3EB2B3" :weight bold)))
-	"viewprp"
-	:group 'rebol3-mode)
-
-(defvar rebol3-drawprp-word 'rebol3-drawprp-word)
-(defface rebol3-drawprp-word '((t (:foreground "#3EB2B3" :weight bold)))
-	"drawprp"
-	:group 'rebol3-mode)
-
 (defvar rebol3-context-word 'rebol3-context-word)
 (defface rebol3-context-word '((t (:foreground "#3EB38C" :weight bold)))
 	"context"
-	:group 'rebol3-mode)
-
-(defvar rebol3-comment-word 'rebol3-comment-word)
-(defface rebol3-comment-word '((t (:foreground "#3EB365" :weight bold)))
-	"modifiers"
 	:group 'rebol3-mode)
 
 (defvar rebol3-help-word 'rebol3-help-word)
@@ -146,7 +106,7 @@
 	:group 'rebol3-mode)
 
 
-;; override fonts, this is applies to all buffers, envestigate a local option
+;; override fonts, this is applies to all buffers, investigate a local option
 (set-face-foreground 'font-lock-string-face "#3EB365")
 (set-face-foreground 'font-lock-comment-face "#4E736D")
 (set-face-foreground 'default "#86B5BF")
@@ -160,51 +120,39 @@
 			;;
 			;; red/rebol words sourced from http://www.rebol.org/view-script.r?script=code-colorizer.r
 			;; by David Oliva 2009
-			(x-comparison '("all" "and" "and~" "any" "equal?" "even?" "greater-or-equal?" "greater?" "lesser-or-equal?" "lesser?" "negative?" "not" "not-equal?" "odd?" "or" "or~" "positive?" "same?" "sign?" "strict-equal?" "xor" "xor?" "zero?" ))
+			(x-comparison '("all" "and" "and~" "any" "end" "equal?" "even?" "greater-or-equal?" "greater?" "lesser-or-equal?" "lesser?" "negative?" "not" "not-equal?" "odd?" "or" "or~" "positive?" "same?" "sign?" "some" "strict-equal?" "xor" "xor?" "zero?" ))
 			(x-context '("alias" "bind" "context" "get" "in" "set" "unset" "use" "value?" "needs"))
-			(x-control '("Red" "opt" "attempt" "break" "case" "catch" "compose" "disarm" "dispatch" "does" "either" "else" "exit" "forall" "foreach" "for" "forever" "forskip" "func" "function" "halt" "has" "if" "launch" "loop" "next" "quit" "reduce" "remove-each" "repeat" "return" "switch" "throw" "try" "unless" "until" "while" "do" ))
+			(x-control '("REBOL" "opt" "attempt" "break" "case" "catch" "compose" "continue" "disarm" "dispatch" "does" "either" "else" "exit" "forall" "foreach" "for" "forever" "forskip" "func" "function" "halt" "has" "if" "launch" "loop" "next" "quit" "reduce" "remove-each" "repeat" "return" "switch" "throw" "try" "unless" "until" "while" "do" ))
 			(x-help '("prin" "print" "about" "comment" "dump-face" "dump-obj" "help" "license" "probe" "source" "trace" "usage" "what"))
 			(x-logic '("found?" "true" "false" "none" "any-block?" "any-function?" "any-string?" "any-type?" "any-word?" "as-pair" "binary?" "bitset?" "block?" "char?" "datatype?" "date?" "decimal?" "dir?" "dump-obj" "email?" "empty?" "error?" "event?" "file?" "function?" "get-word?" "head?" "hash?" "image?" "integer?" "issue?" "library?" "list?" "lit-path?" "lit-word?" "logic?" "money?" "native?" "none?" "number?" "object?" "op?" "pair?" "paren?" "path?" "port?" "refinement?" "routine?" "series?" "set-path?" "set-word?" "string?" "struct?" "suffix?" "tag?" "tail?" "time?" "tuple?" "type?" "unset?" "url?" "word?"))
-			(x-datatypes '("to-binary" "to-bitset" "to-block" "to-char" "to-date" "to-decimal" "to-email" "to-file" "to-get-word" "to-hash" "to-hex" "to-idate" "to-image" "to-integer" "to-issue" "to-list" "to-lit-path" "to-lit-word" "to-logic" "to-money" "to-pair" "to-paren" "to-path" "to-refinement" "to-set-path" "to-set-word" "to-string" "to-tag" "to-time" "to-tuple" "to-url" "to-word" "construct" "deep-reactor" "reactor"))
+			(x-datatypes '("binary" "bitset" "block" "char" "charset" "date" "decimal" "email" "file" "get-word" "hash" "hex" "idate" "image" "integer" "issue" "list" "lit-path" "lit-word" "logic" "money" "pair" "paren" "path" "port" "refinement" "set-path" "set-word" "string" "tag" "time" "tuple" "url" "word" "construct"))
 			(x-math '("abs" "absolute" "add" "arccosine" "acos" "arcsine" "arctangent" "complement" "cosine" "divide" "exp" "log-10" "log-2" "log-e" "maximum-of" "maximum" "max"  "min" "minimum" "multiply" "negate" "power" "random" "remainder" "round" "sine" "square-root" "subtract" "tangent"))
 			(x-io '("ask" "change-dir" "close" "confirm" "connected?" "delete" "dispatch" "echo" "exists\\s\\?" "get-modes" "info?" "input" "input?" "list-dir" "make-dir" "modified?" "open"  "query" "read" "read-io" "rename" "resend" "save" "script?" "secure" "send" "set-modes" "set-net" "size?" "to-local-file" "to-rebol-file" "update" "wait" "what-dir" "write-io" "write" ))
-			(x-series '("alter" "append" "array" "at" "back" "change" "clear" "collect" "copy" "difference" "exclude" "extract" "find" "first" "found?" "free" "head" "index?" "insert" "intersect" "join" "keep" "last" "length?" "maximum-of" "minimum-of" "offset?" "parse" "pick" "poke" "remove" "remove-each" "repend" "replace" "reverse" "select" "skip" "sort" "switch" "tail" "union" "unique"))
-			(x-specialstring '("build-tag" "checksum" "clean-path" "compress" "debase" "decode-cgi" "decompress" "dehex" "detab" "dirize" "enbase" "entab" "form" "import-email" "lowercase" "mold" "parse-xml" "pad" "quote" "reform" "rejoin" "remold" "split-path" "suffix" "trim" "uppercase" "to" "thru"))
-			(x-system '("browse" "call" "component?" "link?" "protect" "protect-system" "recycle" "unprotect" "upgrade"))
-			(x-datetime '("now" "date" "time" "precise" "weekday" "month" "year" "second"))
-			(x-viewcmd '("across" "alert" "as-pair" "below" "brightness?" "caret-to-offset" "center-face" "choose" "clear-fields" "do-events" "flash" "focus" "hide-popup" "hide" "in-window?" "inform" "link?" "load-image" "make-face" "offset-to-caret" "request-color" "request" "request-date" "request-download" "request-file" "request-list" "request-pass" "request-text" "return" "show-popup" "show" "size-text" "span?" "stylize" "unfocus" "unview" "viewed?" "within?"))
-			(x-viewobj '("panel" "font" "area" "check" "face" "tab-panel" "button" "image" "field" "drop-list" "drop-down" "text-list" "text" "slider" "layout" "view"))
-			(x-viewprp '("all-over" "anti-alias" "text" "offset" "size" "x" "y" "data" "extra" "options" "flags" "color" "font-size" "font-weight" "font-name" "font-style" "font-color" "selected" "pane" "tight" "loose" "bold" "picked" "parent" "transparent"))
+			(x-series '("alter" "append" "array" "at" "back" "change" "clear" "collect" "copy" "difference" "exclude" "extract" "find" "found?" "free" "head" "index?" "insert" "intersect" "join" "keep" "length?" "maximum-of" "minimum-of" "offset?" "parse" "pick" "poke" "remove" "remove-each" "repend" "replace" "reverse" "select" "skip" "sort" "switch" "tail" "take" "union" "unique"))
+			(x-specialstring '("build-tag" "checksum" "clean-path" "compress" "debase" "decode-cgi" "decompress" "dehex" "detab" "dirize" "enbase" "entab" "form" "format" "import-email" "lowercase" "mold" "parse-xml" "pad" "quote" "reform" "rejoin" "remold" "reword" "split" "split-path" "suffix" "trim" "uppercase" "to" "thru"))
+			(x-system '("browse" "call" "component?" "link?" "protect" "protect-system" "recycle" "system" "catalog" "bitsets" "numeric" "unprotect" "upgrade"))
+			(x-datetime '("now" "date" "day" "time" "precise" "weekday" "month" "year" "second"))
 			(x-constants '("black" "red" "white" "green" "papaya" "blue"))
-			(x-events '("event" "on-change" "on-enter" "on-menu" "on-down" "on-up" "on-resizing" "react" "on-drag" "on-mid-down" "on-mid-up" "on-wheel" "on-over"))
-			(x-drawcmd '("draw"))
-			(x-drawobj '("box" "line" "circle" "arc" "pen" "fill-pen"))
-			(x-modifiers '("compare" "with" "left" "right" "only" "off" "deep" "output" "filter"))
+			(x-modifiers '("all" "first" "last" "compare" "escape" "with" "left" "lines" "right" "only" "off" "new" "deep" "output" "filter"))
 			;; generate regex string for each category of keywords
 			;; suffixed words 1st, as they contain many duplicates
 			(x-logic-regexp (regexp-opt x-logic 'words))
 			;; hyphenated words, may contain duplicates
 			(x-datatypes-regexp (regexp-opt x-datatypes 'words))
-			(x-viewprp-regexp (regexp-opt x-viewprp 'words))
-			(x-events-regexp (regexp-opt x-events 'words))
 			;; special exception
 			(x-comparison-regexp (regexp-opt x-comparison 'words))
-			;; may contain the odd hyphen or suffix, but mostly pure
+			;; may contain the odd hyphen or suffix
 			(x-context-regexp (regexp-opt x-context 'words))
 			(x-io-regexp (regexp-opt x-io 'words))
 			(x-system-regexp (regexp-opt x-system 'words))
 			(x-help-regexp (regexp-opt x-help 'words))
 			(x-math-regexp (regexp-opt x-math 'words))
 			(x-specialstring-regexp (regexp-opt x-specialstring 'words))
-			(x-viewobj-regexp (regexp-opt x-viewobj 'words))
 			(x-control-regexp (regexp-opt x-control 'words))
-			;; 'pure' words; no hyphens, suffixes etc.
-			(x-viewcmd-regexp (regexp-opt x-viewcmd 'words))
+			;; words; no hyphens, suffixes etc.
 			(x-datetime-regexp (regexp-opt x-datetime 'words))
 			(x-series-regexp (regexp-opt x-series 'words))
 			(x-constants-regexp (regexp-opt x-constants 'words))
-			(x-drawcmd-regexp (regexp-opt x-drawcmd 'words))
-			(x-drawobj-regexp (regexp-opt x-drawobj 'words))
 			(x-modifiers-regexp (regexp-opt x-modifiers 'words))
 		)
 		`(
@@ -213,8 +161,6 @@
 			(,x-logic-regexp . rebol3-logic-word) 
 			;; hyphenated
 			(,x-datatypes-regexp . rebol3-datatypes-word) 
-			(,x-viewprp-regexp . rebol3-viewprp-word) 
-			(,x-events-regexp . rebol3-events-word)
 			;; special exception
 			(,x-comparison-regexp . rebol3-comparison-word)
 			;; some suffixes or hyphens
@@ -224,15 +170,11 @@
 			(,x-help-regexp . rebol3-help-word)
 			(,x-math-regexp . rebol3-math-word) 
 			(,x-specialstring-regexp . rebol3-specialstring-word) 
-			(,x-viewobj-regexp . rebol3-viewobj-word) 
 			(,x-control-regexp . rebol3-control-word)
 			;; pure
-			(,x-viewcmd-regexp . rebol3-viewcmd-word) 
 			(,x-datetime-regexp . rebol3-datetime-word) 
 			(,x-series-regexp . rebol3-series-word) 
 			(,x-constants-regexp . rebol3-constants-word) 
-			(,x-drawcmd-regexp . rebol3-drawcmd-word) 
-			(,x-drawobj-regexp . rebol3-drawobj-word) 
 			(,x-modifiers-regexp . rebol3-modifiers-word)
 			;; note: order above matters, because once colored, that part won't change.
 			;; in general, put longer words first
@@ -241,17 +183,9 @@
 )
 
 ;;;###autoload
-(
-	define-derived-mode rebol3-mode lisp-mode "rebol3 mode"
-	"Major mode for editing Rebol3…"
-	;; code for syntax highlighting
-	(
-		setq font-lock-defaults '(
-			(
-				rebol3-font-lock-keywords
-			)
-		)
-	)
+(define-derived-mode rebol3-mode fundamental-mode "rebol3 mode" "mode for editing Rebol3"
+	(setq font-lock-defaults '((rebol3-font-lock-keywords)))
+	(set (make-local-variable 'comment-start) ";")
 )
 
 ;; add the mode to the `features' list

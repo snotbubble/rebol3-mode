@@ -3,7 +3,6 @@
 ;; do with as you please
 ;;
 ;; handles string and number (int & float) variables
-;; not tested with multiline srings yet
 ;;
 ;; expects the rebol3 binary to be named 'r3' and saved in the same directory as the orgfile.
 ;; get rebol3 from https://github.com/Oldes/Rebol3/releases
@@ -21,33 +20,40 @@
 ;;       ))
 ;;
 ;; remove by hosing the indicated lines and deleting the file
-;;
-;; for (incomplete) syntax highlighting grab rebol3-mode.el from http://www.github.com/snotbubble/reeebmode
-;; its just a copy of red-mode so needs some work...
 
 (require 'ob)
 
 (defun org-babel-execute:rebol3 (body params)
-    "execute rebol3 code"
-    (setq tmpfile (org-babel-temp-file (format "%sr3temp_" (file-name-directory buffer-file-name))))
-    (with-temp-file tmpfile (insert (concat "REBOL [ ]\n" (org-babel-variable-assignments:rebol3 params) (org-babel-expand-body:generic body params) )))
-    (org-babel-eval (format "%sr3 %s && rm %s" (file-name-directory buffer-file-name) (org-babel-process-file-name tmpfile) (org-babel-process-file-name tmpfile)) "")
+	"execute rebol3 code"
+	(setq blkname (format "%s" (nth 4 (org-babel-get-src-block-info))))
+	(setq tmpfile (org-babel-temp-file (format "%srebol3temp_" (file-name-directory buffer-file-name)) ".r3"))
+	(setq par (mapconcat 'identity (org-babel-variable-assignments:rebol3 params) "\n"))
+	(print par)
+	(setq newblock
+		(replace-regexp-in-string 
+			"\\(REBOL[ [a-zA-Z0-9:\n\t\"]+\\)\\([]]+\\)\\(?:.\\|\n\\)"
+			(concat "\\1\\2\n" par "\n\\3")
+			(org-babel-expand-body:generic body params)
+		)
+	)
+	(print newblock)
+	(with-temp-file tmpfile (insert newblock))
+	(org-babel-eval 
+		(format "%sr3 %s && rm %s" (file-name-directory buffer-file-name) (org-babel-process-file-name tmpfile) (org-babel-process-file-name tmpfile)) "")
 )
 
 (defun org-babel-variable-assignments:rebol3 (params)
-  "Return a list of rebol3 statements assigning the block's variables."
-    (replace-regexp-in-string "^ |[()]+" "" (format "%s" 
-        (mapcar
-            (lambda (pair)
-                (cond
-                    ((numberp (cdr pair)) (format "%s: %s" (car pair) (cdr pair)))
-                    ((stringp (cdr pair)) (format "%s: {%s}" (car pair) (cdr pair)))
-                    (t "")
-                )
-            )
-            (org-babel--get-vars params)
-        )
-    ))
+	"Return a list of rebol3 statements assigning the block's variables."
+	(mapcar
+		(lambda (pair)
+			(cond
+				((numberp (cdr pair)) (format "\n%s: %s\n" (car pair) (cdr pair)))
+				((stringp (cdr pair)) (format "\n%s: {%s}\n" (car pair) (cdr pair)))
+				(t "")
+			)
+		)
+		(org-babel--get-vars params)
+	)
 )
 
 (provide 'ob-rebol3)
