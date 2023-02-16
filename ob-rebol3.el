@@ -9,7 +9,7 @@
 ;;
 ;; Made for encapsulated projects where stuff just has to work from the project directory,
 ;; regardless of wherever (and which machine) that directory is copied to... and when.
-;; Temp files are saved as ./r3temp_[kbmash] and are deleted after each run, otherwise they accumulate.
+;; Temp files are saved as ./r3temp_[kbmash].r3 and are deleted after each run unless there's an error.
 ;;
 ;; get this working by saving it to ~./emacs.d
 ;; then add the following indicated lines to ~./.emacs
