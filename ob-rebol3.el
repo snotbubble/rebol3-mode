@@ -31,8 +31,8 @@
 	(print par)
 	(setq newblock
 		(replace-regexp-in-string 
-			"\\(REBOL[ [a-zA-Z0-9:\n\t\"]+\\)\\([]]+\\)\\(?:.\\|\n\\)"
-			(concat "\\1\\2\n" par "\n\\3")
+			"\\(REBOL[ [a-zA-Z0-9:\n\t\"]+\\)\\([]]+\\)\\([[:unibyte:]]+\\)"
+			(concat "\\1]\n" par "\n\\3")
 			(org-babel-expand-body:generic body params)
 		)
 	)
