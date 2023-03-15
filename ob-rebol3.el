@@ -1,25 +1,6 @@
 ;; bare minimum rebol3 ob file
 ;; by c.p.brown 2023
-;; do with as you please
-;;
-;; handles string and number (int & float) variables
-;;
-;; expects the rebol3 binary to be named 'r3' and saved in the same directory as the orgfile.
-;; get rebol3 from https://github.com/Oldes/Rebol3/releases
-;;
-;; Made for encapsulated projects where stuff just has to work from the project directory,
-;; regardless of wherever (and which machine) that directory is copied to... and when.
-;; Temp files are saved as ./r3temp_[kbmash].r3 and are deleted after each run unless there's an error.
-;;
-;; get this working by saving it to ~./emacs.d
-;; then add the following indicated lines to ~./.emacs
-;;
-;; ->    (load-file "~/.emacs.d/ob-rebol3.el")
-;;       (org-babel-do-load-languages 'org-babel-load-languages '(
-;; ->        (rebol3 . t)
-;;       ))
-;;
-;; remove by hosing the indicated lines and deleting the file
+;; do not use this script, its for my own use only
 
 (require 'ob)
 
